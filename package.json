@@ -1,0 +1,12 @@
+{
+  "name": "clawkits-daily",
+  "version": "1.0.0",
+  "description": "Daily OpenClaw generator",
+  "main": "generate-daily-openclaw.js",
+  "dependencies": {
+    "openai": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
