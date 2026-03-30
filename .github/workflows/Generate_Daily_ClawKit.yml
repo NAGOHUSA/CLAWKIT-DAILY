@@ -37,21 +37,25 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install deps
-        run: |
-          set -e
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm i
-          fi
-
       - name: Generate today's Daily OpenClaw
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DAILY_DROP_HEMISPHERE: ${{ secrets.DAILY_DROP_HEMISPHERE }}
           FORCE_OVERWRITE: ${{ github.event_name == 'workflow_dispatch' && inputs.force_overwrite == true }}
-        run: node generate-daily-openclaw.js
+        run: |
+          # Only run npm install if package.json exists, otherwise just run the script directly
+          if [ -f package.json ]; then
+            echo "Installing dependencies..."
+            if [ -f package-lock.json ]; then
+              npm ci --production=false
+            else
+              npm install
+            fi
+          else
+            echo "No package.json found - running script directly (standalone mode)"
+          fi
+          
+          node generate-daily-openclaw.js
 
       - name: Commit & push
         run: |
