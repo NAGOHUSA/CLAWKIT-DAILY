@@ -1,0 +1,19 @@
+{
+  "app": "ClawKit",
+  "date": "2026-03-30",
+  "visual_id": "claw_market_spy",
+  "complexity": 4,
+  "reward_points": 75,
+  "title_en": "Global Trend Scout",
+  "title_zh": "全球趋势侦察兵",
+  "description_en": "Analyzes cross-border e-commerce trends between Douyin and Amazon.",
+  "description_zh": "分析抖音和亚马逊之间的跨境电商趋势。",
+  "blueprint_en": "You are a Lobster Agent. Your task is to scrape trending product keywords from Douyin and compare them with Amazon Best Sellers...",
+  "blueprint_zh": "你是一个龙虾智能体。你的任务是从抖音抓取热门产品关键词，并与亚马逊畅销榜进行对比...",
+  "safety_notes": [
+    "Ensure your local web scraper has permission.",
+    "Do not execute bulk purchases without FaceID confirmation.",
+    "Check storage limits for scraped data."
+  ],
+  "tags": ["E-Commerce", "Research", "OPC"]
+}
