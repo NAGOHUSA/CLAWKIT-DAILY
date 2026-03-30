@@ -1,64 +1,83 @@
-const fs = require('fs');
-const path = require('path');
-const { OpenAI } = require('openai');
+name: Generate Daily OpenClaw
 
-// Configure DeepSeek client only
-const apiKey = process.env.DEEPSEEK_API_KEY;
+on:
+  schedule:
+    # 09:00 UTC daily (5:00 AM Eastern during Standard Time; 4:00 AM during DST)
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+    inputs:
+      force_overwrite:
+        description: "Force overwrite today's file (delete & regenerate, commit even if identical)"
+        type: boolean
+        required: false
+        default: false
 
-if (!apiKey) {
-  console.error("Error: DEEPSEEK_API_KEY environment variable is not set.");
-  process.exit(1);
-}
+jobs:
+  generate-daily-openclaw:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
-const openai = new OpenAI({
-  apiKey: apiKey,
-  baseURL: 'https://api.deepseek.com'
-});
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-async function generateDailyOpenClaw() {
-  const today = new Date().toISOString().split('T')[0];
-  const filePath = path.join(__dirname, 'recipes', `${today}.json`);
+      # If manually dispatched with force_overwrite=true, remove today's file first
+      - name: Pre-clean today's file on force
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.force_overwrite == true }}
+        run: |
+          set -euxo pipefail
+          TODAY_UTC="$(date -u +%F)"
+          rm -f "recipes/${TODAY_UTC}.json" || true
 
-  // 1. Check if we already have today's blueprint (unless forcing overwrite)
-  if (fs.existsSync(filePath) && process.env.FORCE_OVERWRITE !== 'true') {
-    console.log(`OpenClaw for ${today} already exists. Skipping.`);
-    return;
-  }
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-  // 2. Load the System Prompt
-  const systemPrompt = fs.readFileSync(
-    path.join(__dirname, 'system-clawkit-drop.txt'), 
-    'utf8'
-  );
+      - name: Install deps
+        run: |
+          set -e
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm i
+          fi
 
-  console.log(`Generating Daily OpenClaw for ${today} using DeepSeek...`);
+      - name: Generate today's Daily OpenClaw
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DAILY_DROP_HEMISPHERE: ${{ secrets.DAILY_DROP_HEMISPHERE }}
+          FORCE_OVERWRITE: ${{ github.event_name == 'workflow_dispatch' && inputs.force_overwrite == true }}
+        run: node generate-daily-openclaw.js
 
-  try {
-    const response = await openai.chat.completions.create({
-      model: "deepseek-chat",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: `Generate the Daily OpenClaw blueprint for ${today}.` }
-      ],
-      response_format: { type: "json_object" }
-    });
+      - name: Commit & push
+        run: |
+          set -euxo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add -A recipes/*.json || true
+          
+          TODAY_UTC="$(date -u +%F)"
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "chore: add/overwrite Daily OpenClaw for ${TODAY_UTC}"
+            git push
+          else
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force_overwrite }}" = "true" ]; then
+              git commit --allow-empty -m "chore: forced regeneration (no diff) for ${TODAY_UTC}"
+              git push
+            else
+              echo "No changes to commit."
+            fi
+          fi
 
-    const openClawData = JSON.parse(response.choices[0].message.content);
-
-    // 3. Ensure the recipes directory exists
-    const recipesDir = path.join(__dirname, 'recipes');
-    if (!fs.existsSync(recipesDir)) {
-      fs.mkdirSync(recipesDir, { recursive: true });
-    }
-
-    // 4. Write the file
-    fs.writeFileSync(filePath, JSON.stringify(openClawData, null, 2));
-    console.log(`Successfully saved Daily OpenClaw: ${filePath}`);
-
-  } catch (error) {
-    console.error("Error generating OpenClaw:", error);
-    process.exit(1);
-  }
-}
-
-generateDailyOpenClaw();
+      - name: Upload artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-daily-openclaw
+          path: recipes/*.json
+          if-no-files-found: ignore
