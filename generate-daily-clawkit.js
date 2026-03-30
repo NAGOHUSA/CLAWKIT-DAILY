@@ -2,12 +2,18 @@ const fs = require('fs');
 const path = require('path');
 const { OpenAI } = require('openai');
 
-// Configure the client - prioritizing DeepSeek for the Chinese market if available
-const apiKey = process.env.DEEPSEEK_API_KEY || process.env.GROQ_API_KEY || process.env.OPENAI_API_KEY;
-const baseURL = process.env.DEEPSEEK_API_KEY ? 'https://api.deepseek.com' : 
-                (process.env.GROQ_API_KEY ? 'https://api.groq.com/openai/v1' : 'https://api.openai.com/v1');
+// Configure DeepSeek client
+const apiKey = process.env.DEEPSEEK_API_KEY;
 
-const openai = new OpenAI({ apiKey, baseURL });
+if (!apiKey) {
+  console.error("Error: DEEPSEEK_API_KEY environment variable is not set.");
+  process.exit(1);
+}
+
+const openai = new OpenAI({
+  apiKey: apiKey,
+  baseURL: 'https://api.deepseek.com'
+});
 
 async function generateDailyClaw() {
   const today = new Date().toISOString().split('T')[0];
@@ -20,13 +26,16 @@ async function generateDailyClaw() {
   }
 
   // 2. Load the System Prompt
-  const systemPrompt = fs.readFileSync(path.join(__dirname, 'system-clawkit-drop.txt'), 'utf8');
+  const systemPrompt = fs.readFileSync(
+    path.join(__dirname, 'system-clawkit-drop.txt'), 
+    'utf8'
+  );
 
-  console.log(`Generating Lobster Blueprint for ${today} using ${baseURL}...`);
+  console.log(`Generating Lobster Blueprint for ${today} using DeepSeek...`);
 
   try {
     const response = await openai.chat.completions.create({
-      model: process.env.DEEPSEEK_API_KEY ? "deepseek-chat" : "gpt-4o",
+      model: "deepseek-chat",           // DeepSeek's main chat model
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: `Generate the Daily ClawKit blueprint for ${today}.` }
@@ -37,8 +46,9 @@ async function generateDailyClaw() {
     const blueprintData = JSON.parse(response.choices[0].message.content);
 
     // 3. Ensure the blueprints directory exists
-    if (!fs.existsSync(path.join(__dirname, 'blueprints'))) {
-      fs.mkdirSync(path.join(__dirname, 'blueprints'));
+    const blueprintsDir = path.join(__dirname, 'blueprints');
+    if (!fs.existsSync(blueprintsDir)) {
+      fs.mkdirSync(blueprintsDir, { recursive: true });
     }
 
     // 4. Write the file
