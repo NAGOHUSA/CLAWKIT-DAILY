@@ -1,0 +1,10 @@
+# Don't ignore blueprints folder
+!blueprints/
+!blueprints/*.json
+!blueprints/.gitkeep
+
+# Ignore node_modules
+node_modules/
+
+# Ignore package-lock.json if you want (optional)
+# package-lock.json
