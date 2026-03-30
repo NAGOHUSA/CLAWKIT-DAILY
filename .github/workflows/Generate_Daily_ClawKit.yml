@@ -2,7 +2,7 @@ name: Generate Daily OpenClaw
 
 on:
   schedule:
-    # 09:00 UTC daily (5:00 AM Eastern during Standard Time; 4:00 AM during DST)
+    # 09:00 UTC daily
     - cron: "0 9 * * *"
   workflow_dispatch:
     inputs:
@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -32,10 +32,10 @@ jobs:
           TODAY_UTC="$(date -u +%F)"
           rm -f "recipes/${TODAY_UTC}.json" || true
 
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
+      - name: Use Node.js 22
+        uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Install deps
         run: |
@@ -76,7 +76,7 @@ jobs:
 
       - name: Upload artifact
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: latest-daily-openclaw
           path: recipes/*.json
