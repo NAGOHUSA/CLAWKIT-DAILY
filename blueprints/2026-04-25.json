@@ -1,0 +1,27 @@
+{
+  "date": "2026-04-25",
+  "hemisphere": "northern",
+  "title": "Spring Claw: The Art of Gentle Precision",
+  "description": "Embrace the energy of late spring with a claw-care ritual that balances growth and control.",
+  "main_content": "As April blossoms, our claws reflect the season's vitality. Today's blueprint focuses on 'gentle precision'—a technique for maintaining sharpness without aggression. Start by inspecting each claw under natural light, noting any splits or dullness. Use a fine-grit file to shape tips into a rounded point, moving in one direction to avoid fraying. Finish with a conditioning oil (like jojoba) to strengthen the keratin. This practice not only enhances grip but also fosters a mindful connection with your environment. Remember: claws are tools, not weapons.",
+  "key_takeaways": [
+    "Inspect claws daily for damage during active spring months.",
+    "File in one direction to prevent micro-fractures.",
+    "Conditioning oil improves flexibility and prevents breakage.",
+    "Gentle precision builds trust with pets or in self-care routines."
+  ],
+  "metadata": {
+    "season": "spring",
+    "theme": "claw care",
+    "difficulty": "beginner",
+    "time_required": "10 minutes",
+    "tools_needed": [
+      "fine-grit file",
+      "jojoba oil",
+      "soft cloth"
+    ],
+    "generated_at": "2026-04-25T09:16:49.698Z",
+    "model": "deepseek-chat",
+    "version": "1.0.0"
+  }
+}
