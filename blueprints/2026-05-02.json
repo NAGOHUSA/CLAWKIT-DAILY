@@ -1,0 +1,30 @@
+{
+  "date": "2026-05-02",
+  "hemisphere": "northern",
+  "title": "Claw Care in Spring: Shedding and Sharpening",
+  "description": "As animals emerge from winter, their claws need attention. Learn how to maintain healthy claws during the shedding season.",
+  "main_content": "Spring is a time of renewal, and for many animals, that includes shedding old claw sheaths to reveal sharp new ones. In the northern hemisphere, May 2nd marks a period when creatures like cats, bears, and raptors are actively grooming and sharpening their claws. For domestic cats, provide scratching posts to help them shed outer layers. For wild animals, observe from a distance. Never trim claws during this time unless necessary, as the new growth is sensitive. A balanced diet rich in biotin and protein supports strong claw regeneration. Remember: healthy claws mean better grip, hunting, and climbing.",
+  "key_takeaways": [
+    "Spring is prime time for claw shedding and regrowth.",
+    "Provide scratching posts for indoor cats to aid natural shedding.",
+    "Avoid trimming claws during active shedding to prevent injury.",
+    "Nutrition matters: biotin and protein strengthen new claws."
+  ],
+  "metadata": {
+    "season": "spring",
+    "activity": "claw maintenance",
+    "species": [
+      "cats",
+      "bears",
+      "raptors"
+    ],
+    "tips": [
+      "scratching post",
+      "diet",
+      "observation"
+    ],
+    "generated_at": "2026-05-02T09:22:55.480Z",
+    "model": "deepseek-chat",
+    "version": "1.0.0"
+  }
+}
