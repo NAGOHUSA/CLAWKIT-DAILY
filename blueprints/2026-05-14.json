@@ -1,0 +1,22 @@
+{
+  "title": "Spring Claw Sharpening & Growth",
+  "description": "As spring progresses, focus on natural claw maintenance and growth cycles for northern hemisphere creatures.",
+  "main_content": "During mid-May, many northern hemisphere animals experience a peak in claw growth due to increased activity and longer daylight hours. Observe your pet's claws for signs of splitting or overgrowth. Use appropriate scratching posts or natural wood to aid shedding. For wild animals, consider their habitat's moisture levels, as damp soil can soften claws, making them prone to damage. This is an ideal time to trim indoor pets' claws to prevent snagging. Remember, claw health reflects overall well-being.",
+  "key_takeaways": [
+    "Spring triggers faster claw growth; monitor regularly.",
+    "Provide natural scratching surfaces to encourage shedding.",
+    "Check for moisture-related claw issues in damp environments.",
+    "Trim indoor pets' claws to prevent accidental injuries."
+  ],
+  "metadata": {
+    "date": "2026-05-14",
+    "hemisphere": "northern",
+    "season": "spring",
+    "focus": "claw maintenance",
+    "generated_at": "2026-05-14T09:46:33.678Z",
+    "model": "deepseek-chat",
+    "version": "1.0.0"
+  },
+  "date": "2026-05-14",
+  "hemisphere": "northern"
+}
