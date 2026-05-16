@@ -1,0 +1,21 @@
+{
+  "date": "2026-05-16",
+  "hemisphere": "northern",
+  "title": "Pouncing on Spring: The Art of the Ambush",
+  "description": "Learn the essential techniques of the springtime ambush, from stalking to the final pounce, perfect for young kits honing their hunting skills.",
+  "main_content": "As the snow melts and the forest awakens, prey becomes more active. Spring is the ideal time for young kits to practice the ambush. Start by choosing a spot with good cover, like a thick bush or a fallen log. Crouch low, keeping your tail still and your ears perked. Move slowly, placing each paw silently. When you're within a few fox-lengths, pause, gather your energy, and launch forward with a powerful spring. Practice on leaves first—if they rustle, you're too noisy. Remember, patience is your sharpest claw.",
+  "key_takeaways": [
+    "Choose a hiding spot with natural cover.",
+    "Move silently with deliberate paw placements.",
+    "Wait for the perfect moment to spring.",
+    "Practice makes perfect—start with leaves!"
+  ],
+  "metadata": {
+    "season": "spring",
+    "theme": "hunting",
+    "difficulty": "beginner",
+    "generated_at": "2026-05-16T09:30:08.723Z",
+    "model": "deepseek-chat",
+    "version": "1.0.0"
+  }
+}
