@@ -1,0 +1,28 @@
+{
+  "title": "Claw Care Under the Summer Sun",
+  "description": "As summer begins in the northern hemisphere, learn how to protect and maintain your kit's claws during hot, dry weather.",
+  "main_content": "With the arrival of June, northern hemisphere residents face warmer temperatures and lower humidity, which can affect claw health. Dry air can cause claws to become brittle and prone to splitting. To keep claws strong, increase moisture in the environment using a humidifier or by placing water bowls near heat sources. Regularly apply cuticle oil to prevent cracking. For outdoor kits, check claws after walks for signs of wear from hot pavement or rough terrain. Trim claws more frequently if they are growing faster due to increased activity. Remember, healthy claws start with a balanced diet rich in biotin and omega-3 fatty acids.",
+  "key_takeaways": [
+    "Dry summer air can make claws brittle; use humidifiers or cuticle oil.",
+    "After outdoor activities, inspect claws for damage from hot surfaces.",
+    "Increase nail trimming frequency during active summer months.",
+    "Support claw health with biotin and omega-3 supplements."
+  ],
+  "metadata": {
+    "date": "2026-06-03",
+    "hemisphere": "northern",
+    "season": "summer",
+    "tags": [
+      "claw care",
+      "summer",
+      "dry weather",
+      "kit health",
+      "daily tip"
+    ],
+    "generated_at": "2026-06-03T10:32:22.866Z",
+    "model": "deepseek-chat",
+    "version": "1.0.0"
+  },
+  "date": "2026-06-03",
+  "hemisphere": "northern"
+}
